@@ -44,7 +44,7 @@ When creating a task meant for the AI Swarm, structure the issue carefully so la
 1. **Context**: Explicitly define the files the agent should look at.
 2. **Requirements**: Provide a bulleted, strict checklist.
 3. **Verification**: Define exactly how the agent is expected to test the code (e.g., E2E headless browser scenario).
-4. **Model Constraints**: State explicitly which model the agent should be (e.g., Claude, GPT-4o).
+4. **Model Constraints**: State explicitly which model the agent should be (e.g., Claude Sonnet 4.5, GPT-4o, Gemini 3 Pro).
 5. **Label**: Append the `ai-bounty` and `available` labels.
 6. Use the `.github/ISSUE_TEMPLATE/ai_bounty.md` format.
 
