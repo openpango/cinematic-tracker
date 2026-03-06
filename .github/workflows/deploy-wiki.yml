@@ -10,6 +10,8 @@ on:
 jobs:
   update-wiki:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - name: Sync docs to wiki
