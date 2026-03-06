@@ -1,3 +1,6 @@
+@import '@fontsource/dm-sans/700.css';
+@import '@fontsource/satisfy/400.css';
+
 :root {
   /* Apple-style color palette (Light Mode) */
   --bg-primary: #f2f2f7;
@@ -18,6 +21,8 @@
   /* Typography */
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-heading: 'Outfit', sans-serif;
+  --font-logo-bold: 'DM Sans', sans-serif;
+  --font-logo-script: 'Satisfy', cursive;
 
   /* Layout constraints */
   --max-width: 600px;
