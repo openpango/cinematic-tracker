@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * Renders the new app identity in a dual-font stacked format:
  * [FIRST] (Bold Sans)

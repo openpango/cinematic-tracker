@@ -14,12 +14,38 @@ export default function Profile() {
     const [fullName, setFullName] = useState('');
     const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
+    // Analytic Stats
+    const [stats, setStats] = useState({ moviesWatched: 0, tvTracked: 0, queueSize: 0 });
+
     useEffect(() => {
         if (user) {
             setFullName(user.user_metadata?.full_name || '');
             setAvatarUrl(user.user_metadata?.avatar_url || null);
+            fetchStats(user.id);
         }
     }, [user]);
+
+    const fetchStats = async (userId: string) => {
+        const { data, error } = await supabase
+            .from('list_items')
+            .select('status, media (media_type)')
+            .eq('user_id', userId);
+
+        if (!error && data) {
+            let moviesWatched = 0;
+            let tvTracked = 0;
+            let queueSize = 0;
+
+            data.forEach(item => {
+                const mediaType = (item.media as any)?.media_type;
+                if (item.status === 'watched' && mediaType === 'movie') moviesWatched++;
+                if (mediaType === 'tv') tvTracked++;
+                if (item.status === 'to_watch') queueSize++;
+            });
+
+            setStats({ moviesWatched, tvTracked, queueSize });
+        }
+    };
 
     const handleProfileUpdate = async () => {
         if (!user) return;
@@ -137,6 +163,30 @@ export default function Profile() {
                 <p style={{ color: 'var(--text-secondary)', fontSize: '14px', margin: 0 }}>
                     {user?.email}
                 </p>
+
+                {/* Micro Analytics Dashboard */}
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '12px',
+                    width: '100%',
+                    marginTop: '16px',
+                    borderTop: '1px solid var(--border-color)',
+                    paddingTop: '20px'
+                }}>
+                    <div style={{ textAlign: 'center' }}>
+                        <span style={{ display: 'block', fontSize: '24px', fontWeight: 700, color: 'var(--text-primary)' }}>{stats.moviesWatched}</span>
+                        <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Movies Watched</span>
+                    </div>
+                    <div style={{ textAlign: 'center' }}>
+                        <span style={{ display: 'block', fontSize: '24px', fontWeight: 700, color: 'var(--text-primary)' }}>{stats.tvTracked}</span>
+                        <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>TV Tracked</span>
+                    </div>
+                    <div style={{ textAlign: 'center' }}>
+                        <span style={{ display: 'block', fontSize: '24px', fontWeight: 700, color: 'var(--text-primary)' }}>{stats.queueSize}</span>
+                        <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>In Queue</span>
+                    </div>
+                </div>
             </Card>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
