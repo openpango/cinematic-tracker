@@ -1,0 +1,21 @@
+name: Sync Docs to Wiki
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+  workflow_dispatch:
+
+jobs:
+  update-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Sync docs to wiki
+        uses: Andrew-Chen-Wang/github-wiki-action@v4
+        with:
+          path: docs
+          commit-message: "docs(wiki): Automated Swarm Sync"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
