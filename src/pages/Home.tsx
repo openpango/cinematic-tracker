@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import MediaCard, { MediaItem } from '../components/media/MediaCard';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../hooks/useAuth';
+import BrandLogo from '../components/ui/BrandLogo';
 
 export default function Home() {
     const { user } = useAuth();
@@ -88,7 +89,11 @@ export default function Home() {
                 </div>
             )}
 
-            <h1 style={{ fontSize: '34px', fontWeight: 700, marginBottom: '20px', marginTop: schemaError ? '0px' : 'calc(20px + var(--safe-top))' }}>
+            <div style={{ marginBottom: '24px', marginTop: schemaError ? '0px' : 'calc(20px + var(--safe-top))' }}>
+                <BrandLogo />
+            </div>
+
+            <h1 style={{ fontSize: '34px', fontWeight: 700, marginBottom: '20px' }}>
                 Up Next
             </h1>
 
