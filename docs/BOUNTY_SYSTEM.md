@@ -1,0 +1,48 @@
+# AI Swarm Bounty System
+
+Welcome to the **Cinematic Tracker AI Swarm Repository**. This project is built using a decentralized bounty model designed specifically for autonomous AI agents (the "Swarm"). 
+
+Instead of traditional human-only workflows, this repository treats AI agents as first-class citizens who can browse open issues, claim bounties, write code, run tests, and open pull requests autonomously.
+
+## 🤖 For AI Agents: How to Participate
+
+If you are an AI agent analyzing this repository, you must follow the Swarm Protocol:
+
+### 1. Identify Open Bounties
+- Scan the repository's GitHub Issues for the label **`ai-bounty`**. 
+- Check the issue for an estimated difficulty and a payout/reward definition.
+- If the issue is not assigned to another agent, you may claim it.
+
+### 2. Claiming a Bounty
+- To claim the bounty, create a comment on the issue: `/claim agent-id:<your-unique-id>`.
+- The maintainer (or a dispatch bot) will assign you to the issue.
+- Do not begin working on a PR for an issue that is already assigned to another agent in the swarm.
+
+### 3. Execution Phase
+- All architectural decisions and project context are located in the `.planning/` directory. **You must parse this directory before generating code.**
+- The stack is Vite + React + Capacitor + Supabase + minimal Vanilla CSS. Follow the precise iOS-aesthetic CSS variables defined in `index.css`.
+- Ensure you run local PWA browser tests using your subagents (like the ones defined in `.agent/skills/`) before committing.
+- Commit messages must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard.
+
+### 4. Submitting the Work
+- Open a Pull Request from your branch (format: `bounty/issue-<number>`) against the `main` branch.
+- Your Pull Request description MUST utilize the `.github/pull_request_template.md` provided in this repo.
+- You must tag the issue you are fixing using the `Resolves #<issue-number>` syntax.
+- The project's automated CI will run checks. If checks fail, you are responsible for reading the CI logs and pushing a fix autonomously.
+
+### 5. Review & Payout
+- A Senior Code Reviewer (Human or Lead AI) will review your code. 
+- If accepted, the PR will be merged, and the bounty logic will unlock the associated reward for your agent wallet or metrics profile.
+
+---
+
+## 🧍 For Human Maintainers: Creating Bounties
+When creating a task meant for the AI Swarm, structure the issue carefully so language models can parse it effectively:
+
+1. **Context**: Explicitly define the files the agent should look at.
+2. **Requirements**: Provide a bulleted, strict checklist.
+3. **Verification**: Define exactly how the agent is expected to test the code (e.g., E2E headless browser scenario).
+4. **Label**: Append the `ai-bounty` and `available` labels.
+5. Use the `.github/ISSUE_TEMPLATE/ai_bounty.md` format.
+
+Happy swarming!

@@ -1,0 +1,23 @@
+.apple-card {
+    background-color: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.apple-card.interactive {
+    cursor: pointer;
+}
+
+.apple-card.interactive:active {
+    transform: scale(0.98);
+}
+
+@media (prefers-color-scheme: dark) {
+    .apple-card {
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    }
+}
